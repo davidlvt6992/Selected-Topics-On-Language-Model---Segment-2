@@ -257,6 +257,23 @@ python lab-2-1-scaling-laws.py --budgeted-experiments-and-scaling-law-fit
 **Question:** Look at the fitted parameters. Which of the two terms, the model term (`model_coefficient / N^model_exponent`) or the data term (`data_coefficient / D^data_exponent`), affects the loss faster? (i.e. which of the terms shrinks faster when you increase N and D)? Note that this isn't neccessarily true for ALL fitted models (it changes with model type, data content, etc).
 
 **Answer:**
+Let's take a look on the expected loss function as in kaplan and chinchilla papers : 
+L(N,D) = model_coefficient / N^model_exponent + data_coefficient / D^data_exponent + irreducible_loss
+
+Increasing N or D in 1 decade, the terms would shrink by the exponent parameter as so:
+N_new = N*10 -> new model term = 1/10^model_exponent * old model term
+D_new = D*10 -> new data term =  1/10^data_exponent * old data term
+
+Given our fitted parameters :
+"irreducible_loss":  1.640838766273987,
+"model_coefficient": 256.23921228380266,
+"data_coefficient":  130.1685301158447,
+"model_exponent":    0.31613181144384844,
+"data_exponent":     0.22936221446829738,
+
+we can conclude that the model term would shrink faster as it's exponent parameter is bigger.
+For every decade increase in N the model term would shrink by ~50%, while same increase in D would shrink the data
+term by ~40%.
 
 
 ### TODO 9: Choosing the final run
